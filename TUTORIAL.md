@@ -74,12 +74,14 @@ bash boot/startup.sh
 ### 两条命令线
 
 ```bash
-# 主力：rish（Shizuku）
-rish -c '命令'
-
-# 备选：adb shell
+# 日常主力：adb 线（直连 adbd，快——查状态、轮询、监控都走它）
 adb -s 127.0.0.1:5555 shell 命令
+
+# 备用：rish 线（经 Shizuku 中转，慢一档；服务偶尔被系统杀，断了要重新拉起，别拿它做日常轮询）
+rish -c '命令'
 ```
+
+> 跑得勤的走 adb，跑得少的用 rish。两条互为备份：Shizuku 服务掉了，用 adb 线跑一次点火命令（start.sh）就能救回来。
 
 ### 技能库速查
 
