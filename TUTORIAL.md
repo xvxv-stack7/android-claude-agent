@@ -211,11 +211,15 @@ A: 重跑 `bash bootstrap.sh`。或者用开机自启脚本。
 **Q: WiFi 关了也能用？**
 A: 能。连的是 127.0.0.1 回环，不走任何网络。
 
-**Q: Shizuku 后台被杀？**
-A: 打开 Shizuku app → 通过 ADB 启动。或者用自愈命令：
+**Q: Shizuku 后台被杀、rish 用不了？**
+A: rish 靠 Shizuku 服务活着——服务一死，rish 自己也哑火，发不出命令。用 adb 线把它点回来：
 ```bash
-rish -c 'setprop service.adb.tcp.port 5555 && stop adbd && start adbd'
+adb -s 127.0.0.1:5555 shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh
 ```
+也可以打开 Shizuku app → 「通过 ADB 启动」，照它提示走。点完 `rish -c 'whoami'` 出 `shell` 就算活了。
+
+**Q: adb 回环掉了（5555 连不上）？**
+A: 重走一遍「关键一步」的跳板步 + 锁死步，或直接 `bash bootstrap.sh`。这条线自己修不了自己——必须从无线调试那边重新跳。
 
 **Q: 支持哪些品牌？**
 A: 所有 Android 11+ 设备。已在 vivo S19 (OriginOS/Android 16) 实测通过。
