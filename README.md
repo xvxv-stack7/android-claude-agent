@@ -68,6 +68,42 @@
 
 ---
 
+## 🧵 架构总览：两条控制线路
+
+整个方案就四层，两条通道并行：
+
+```
+AI Agent（Claude Code）
+   │
+   ▼
+技能层   skills/ · adb-skills.sh
+   │
+   ├── ① rish 线 ──→ Shizuku 服务（持 shell 权限）
+   │                    ▲
+   │                    │ 点火 / 救急：adb 线跑 start.sh 把它唤醒
+   └── ② adb 线 ──→ adbd（127.0.0.1:5555 回环）
+                        │
+                        ▼
+                Android 系统（感知 / 控制）
+```
+
+| 线路 | 命令 | 说明 |
+|---|---|---|
+| ① rish 线 | `rish -c '命令'` | 走 Shizuku 的 shell 权限，日常主力 |
+| ② adb 线 | `adb -s 127.0.0.1:5555 shell 命令` | 走 127.0.0.1 回环，同时是 Shizuku 的点火线 |
+
+**两条线的分工与救急：**
+
+- **日常用哪条都行**，技能库两条都支持。
+- **Shizuku 服务掉了**（被系统杀、重启后没拉起）→ 用 ② adb 线跑一次点火命令，它就活过来：
+  `adb -s 127.0.0.1:5555 shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh`
+- **adb 回环掉了** → 重走下面「关键一步」的跳板步 + 锁死步；只要 Shizuku 还活着，① rish 线照常用，不至于全瞎。
+- **两条一起没**（手机重启）→ 按「重启后怎么办」重建，或 `bash bootstrap.sh` 一键。
+
+> 🔁 **为什么不把两条合成一条？**——两条走的机制完全不同（Shizuku 走 Binder 进程、adb 走 TCP 回环），留两条就是为了**互为备份**：坏一条，另一条还在。
+
+---
+
 ## 🔑 关键一步：拿到 Shizuku + adb 回环双在线
 
 **整个方案的核心。你已经装了 Shizuku 和 Termux，接下来只需要无线调试做一次跳板。**
