@@ -1,1 +1,77 @@
-şë+ı¸§ıéï§+a¢}ßz×!§%,h­æâ²ËüôFŠÑîlÈúÚ$zp‚YæÌ÷ŞµÈij©ÊØh÷­rrº¹F3ŠÑ¢´{›+G¹¸¬²ç‚	a0#ÒD ‚YæÌø¦¦ŠíjÌ§r*"šš+¶‹"šš+¶·¢šš+¶Ì¬Šjh®Øm¶œF!1Ô
+#!/usr/bin/env python3
+"""fetch.py â€” æŠ“å•ä¸ª URL æ­£æ–‡ã€‚GitHub issue/PR èµ° GitHub API + tokenï¼ˆç»•ç½‘é¡µåçˆ¬ï¼‰ï¼Œå…¶ä»–èµ° CC-Web-MCP fetch_pageã€‚
+
+ç”¨æ³•:
+  python fetch.py <url>
+é…ç½®:
+  GH_TOKEN       GitHub ä¸ªäººè®¿é—®ä»¤ç‰Œï¼ˆæŠ“ GitHub issue å…¨æ–‡ç”¨ï¼‰
+  CC_WEB_MCP_SRC æŒ‡å‘ CC-Web-MCP æºç ç›®å½•
+"""
+import asyncio
+import os
+import re
+import sys
+
+import httpx
+
+_GITHUB_RE = re.compile(r"https?://github\.com/([^/]+)/([^/]+)/(issues|pull)/(\d+)")
+
+TIMEOUT = 8.0
+MAX_CHARS = 3000
+
+
+async def _gh_issue(owner, repo, num, token):
+    headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+    r = await asyncio.wait_for(
+        httpx.get(f"https://api.github.com/repos/{owner}/{repo}/issues/{num}", headers=headers, timeout=15),
+        timeout=TIMEOUT,
+    )
+    r.raise_for_status()
+    d = r.json()
+    return d.get("title", ""), d.get("body") or ""
+
+
+async def _fetch_via_mcp(url):
+    sys.path.insert(0, os.environ.get("CC_WEB_MCP_SRC", ""))
+    from cc_web_mcp import web  # noqa: E402
+    config = web.load_config()
+    r = await asyncio.wait_for(web.fetch_page(url=url, config=config), timeout=TIMEOUT)
+    if not r.get("ok"):
+        return None
+    return (r.get("final_url") or url), (r.get("markdown") or "")
+
+
+async def main() -> None:
+    url = sys.argv[1] if len(sys.argv) > 1 else ""
+    if not url:
+        print("ç”¨æ³•: fetch.py <url>")
+        return
+
+    token = os.environ.get("GH_TOKEN", "").strip()
+    m = _GITHUB_RE.match(url)
+    try:
+        if m and token:
+            title, body = await _gh_issue(m.group(1), m.group(2), m.group(4), token)
+            md = body or ""
+            print(f"URL: {url}")
+            print(f"[{len(md)} å­—ç¬¦] Â· {title}")
+            print("---")
+            print(md[:MAX_CHARS])
+            return
+        out = await _fetch_via_mcp(url)
+        if not out:
+            print(f"[fetch æœªæˆåŠŸ] {url}")
+            return
+        final_url, md = out
+        print(f"URL: {final_url or url}")
+        print(f"[{len(md)} å­—ç¬¦]")
+        print("---")
+        print(md[:MAX_CHARS])
+    except asyncio.TimeoutError:
+        print(f"[fetch è¶…æ—¶ {TIMEOUT}s] {url}")
+    except Exception as e:  # noqa: BLE001
+        print(f"[fetch å¤±è´¥] {url} :: {type(e).__name__}: {str(e)[:200]}")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

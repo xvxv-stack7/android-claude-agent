@@ -1,1 +1,63 @@
-şë+ı¸§ıéï§+a¢}ìyªÜ†œ‚	g›0#ÛŠxŸ÷nrGnrH(§+a¢{j·!§'è­è ­†æê¹êò%„ÀI‚	g›0#ğyºr+G¹¸¬²ç ŠØnnÇš­ÈiÈh­æÀ<­¢G§Šjh®Ö¬Êw"¢)©¢»h²)©¢»lÊÀ‚I
+#!/usr/bin/env python3
+"""search.py â€” è°ƒ CC-Web-MCP æœç´¢åç«¯åšä¸€æ¬¡æœç´¢ï¼ˆbing_cn / duckduckgo å…œåº•ï¼‰ã€‚
+
+ç”¨æ³•:
+  python search.py [--foreign|--github] <query>
+
+é…ç½®:
+  CC_WEB_MCP_SRC  æŒ‡å‘ CC-Web-MCP æºç ç›®å½•ï¼ˆweb.py æ‰€åœ¨ï¼‰ã€‚
+  GitHub å®˜æ–¹ issue æ¨èèµ° github_search.pyï¼ˆGitHub API + tokenï¼Œå¯æ‹¿å…¨æ–‡ï¼‰ã€‚
+"""
+import asyncio
+import os
+import sys
+
+CC_SRC = os.environ.get("CC_WEB_MCP_SRC", "")
+if CC_SRC:
+    sys.path.insert(0, CC_SRC)
+try:
+    from cc_web_mcp import web  # noqa: E402
+except ImportError:
+    print("ç¼ºå°‘ cc_web_mcpï¼šè¯·è®¾ç½®ç¯å¢ƒå˜é‡ CC_WEB_MCP_SRC æŒ‡å‘ CC-Web-MCP æºç ç›®å½•")
+    sys.exit(1)
+
+
+async def main() -> None:
+    args = sys.argv[1:]
+    foreign = "--foreign" in args
+    github = "--github" in args
+    if foreign:
+        args = [a for a in args if a != "--foreign"]
+    if github:
+        args = [a for a in args if a != "--github"]
+    query = " ".join(args) if args else sys.stdin.read().strip()
+    if not query:
+        print("ç”¨æ³•: search.py [--foreign|--github] <query>")
+        return
+
+    if github:
+        # site é™å®š GitHubï¼›å®˜æ–¹ issue å…¨æ–‡è¯·ç”¨ github_search.pyï¼ˆGitHub API+tokenï¼‰
+        query += " site:github.com"
+
+    config = web.load_config()
+    if foreign:
+        config = web._config_with_search_providers(config, ("duckduckgo",))
+    elif github:
+        config = web._config_with_search_providers(config, ("bing_cn",))
+    else:
+        config = web._config_with_search_providers(config, ("bing_cn", "duckduckgo"))
+
+    r = await web.search_web(query, max_results=5, config=config)
+    if r.get("ok"):
+        for x in r.get("results", []):
+            print(f"### {x.get('title')}")
+            print(x.get("url"))
+            if x.get("snippet"):
+                print(x.get("snippet")[:300])
+                print()
+    else:
+        print("æœç´¢å¤±è´¥:", r.get("error", "æœªçŸ¥é”™è¯¯"))
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
