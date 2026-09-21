@@ -1,6 +1,6 @@
-# termux-shizuku 完整教程
+# android-claude-agent 完整教程
 
-> 仓库地址：https://gitee.com/xvxv663/termux-shizuku（GitHub 镜像：https://github.com/xvxv-stack7/termux-shizuku）
+> 仓库地址：https://gitee.com/xvxv663/android-claude-agent（GitHub 镜像：https://github.com/xvxv-stack7/android-claude-agent）
 
 ---
 
@@ -51,8 +51,8 @@
 pkg install android-tools
 
 # 2. 克隆仓库
-git clone https://gitee.com/xvxv663/termux-shizuku.git
-cd termux-shizuku
+git clone https://gitee.com/xvxv663/android-claude-agent.git
+cd android-claude-agent
 
 # 3. 打开 USB 调试
 # 设置 → 开发者选项 → USB 调试 → 打开

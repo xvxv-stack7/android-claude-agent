@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# termux-shizuku / 一键启动脚本
+# android-claude-agent / 一键启动脚本
 # 免 WiFi 免电脑，USB 调试做锚，adb tcpip 5555 做桥
 # 2026-07-09 在 vivo S19 (OriginOS/Android 16) 实测通过
 
@@ -9,7 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # 自动反馈：出错时自动提交 Gitee Issue
 source "$SCRIPT_DIR/auto-feedback.sh" 2>/dev/null || {
-    source <(curl -sL "https://gitee.com/xvxv663/termux-shizuku/raw/master/auto-feedback.sh") 2>/dev/null || true
+    source <(curl -sL "https://gitee.com/xvxv663/android-claude-agent/raw/master/auto-feedback.sh") 2>/dev/null || true
 }
 
 RED='\033[0;31m'
@@ -39,7 +39,7 @@ fi
 
 echo ""
 echo "=========================================="
-echo "  termux-shizuku / 一键启动"
+echo "  android-claude-agent / 一键启动"
 echo "  USB 调试 + adb TCP 5555 方案"
 echo "=========================================="
 echo ""

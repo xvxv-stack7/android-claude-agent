@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# termux-shizuku 开机自启脚本模板
+# android-claude-agent 开机自启脚本模板
 # 使用方法:
 #   1. 复制: cp boot/startup.sh.example boot/startup.sh
 #   2. 修改 SHIZUKU_START_PATH 为你的 Shizuku 启动命令
@@ -9,7 +9,7 @@
 #   打开 Shizuku App → "通过连接电脑启动" → 复制 adb shell 那行
 #   把 "adb shell" 后面的部分填到下面
 
-echo "=== termux-shizuku boot ==="
+echo "=== android-claude-agent boot ==="
 
 # 🔧 改成你的 Shizuku 启动命令（打开 Shizuku App 获取）
 SHIZUKU_START_PATH="/storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh"

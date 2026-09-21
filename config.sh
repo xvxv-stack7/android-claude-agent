@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # ============================================
-# termux-shizuku 集中配置
+# android-claude-agent 集中配置
 # ============================================
 
 # --- ADB ---

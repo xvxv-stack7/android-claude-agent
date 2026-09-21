@@ -18,7 +18,7 @@ Powered by [NeteaseCloudMusicApiEnhanced](https://github.com/NeteaseCloudMusicAp
 
 ## Requirements
 
-- Node.js (for API server) — already included in termux-shizuku environment
+- Node.js (for API server) — already included in android-claude-agent environment
 - mpv — `pkg install mpv`
 - NetEase Cloud Music API — `npm install -g @neteasecloudmusicapienhanced/api`
 

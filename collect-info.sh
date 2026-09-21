@@ -65,4 +65,4 @@ echo "Commit=$(cd "$SCRIPT_DIR" && git log --oneline -1 2>/dev/null || echo not_
 
 echo ""
 echo "--- 以上全选复制 → 发 issue ---"
-echo "https://gitee.com/xvxv663/termux-shizuku/issues"
+echo "https://gitee.com/xvxv663/android-claude-agent/issues"

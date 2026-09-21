@@ -1,8 +1,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# termux-shizuku 开机自启脚本
+# android-claude-agent 开机自启脚本
 # 追加到 ~/.termux/boot/startup 或直接放 ~/.termux/boot/ 目录
 
-echo "=== termux-shizuku 开机自启 ==="
+echo "=== android-claude-agent 开机自启 ==="
 
 (
   for i in $(seq 1 20); do

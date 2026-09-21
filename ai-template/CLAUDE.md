@@ -1,4 +1,4 @@
-# termux-shizuku AI 技能模板
+# android-claude-agent AI 技能模板
 # 把这个文件内容加到 CLAUDE.md 或 AI 配置中
 
 ## 🤖 Claude Code 用户首选
@@ -31,7 +31,7 @@
 
 ---
 
-## Shizuku 手机控制（termux-shizuku）
+## Shizuku 手机控制（android-claude-agent）
 
 三条线控制手机，不依赖 WiFi，不需电脑，不需 root。
 

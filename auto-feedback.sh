@@ -4,14 +4,14 @@
 # 用法：在主脚本里 source 这个文件，trap 自动生效
 #
 # v2: 本地缓存补发 + 退出码解释 + 关键字匹配 + doctor 诊断
-# 适配 termux-shizuku 的 adb/Shizuku/sensor 错误场景
+# 适配 android-claude-agent 的 adb/Shizuku/sensor 错误场景
 # ============================================
 
 SCRIPT_DIR="${SCRIPT_DIR:-$(cd "$(dirname "$0")" && pwd)}"
 FAILED_DIR="$HOME/.cc-connect/failed_feedback"
 
 # 自动检测平台：Gitee / GitHub，使用对应的 token 和接口
-AUTO_FB_REPO_NAME=$(git rev-parse --show-toplevel 2>/dev/null | xargs basename 2>/dev/null || echo "termux-shizuku")
+AUTO_FB_REPO_NAME=$(git rev-parse --show-toplevel 2>/dev/null | xargs basename 2>/dev/null || echo "android-claude-agent")
 _detect_platform() {
     local remote=$(git remote get-url origin 2>/dev/null || git remote get-url gitee 2>/dev/null || echo "")
     local owner token api_base issues_url
@@ -67,7 +67,7 @@ retry_failed() {
 }
 
 # ============================================
-# 关键字匹配——termux-shizuku 特有错误
+# 关键字匹配——android-claude-agent 特有错误
 # ============================================
 match_output() {
     local cmd="$1"
@@ -162,7 +162,7 @@ match_output() {
 }
 
 # ============================================
-# 退出码分析——termux-shizuku 场景
+# 退出码分析——android-claude-agent 场景
 # ============================================
 explain_error() {
     local code="$1"

@@ -39,8 +39,8 @@
 
 > 🎯 **还没装 Claude Code？** 先去 [android-claude-wechat](https://gitee.com/xvxv663/android-claude-wechat) —— 一条命令装好 Claude Code 和运行环境。装完回来，本仓库让你的 Claude 真正摸到手机。**两个仓库是上下游：先装那个，再接这个。**
 
-[![Gitee](https://img.shields.io/badge/Gitee-国内下载-c71d23?logo=gitee)](https://gitee.com/xvxv663/termux-shizuku)
-[![GitHub](https://img.shields.io/badge/GitHub-国际版-181717?logo=github)](https://github.com/xvxv-stack7/termux-shizuku)
+[![Gitee](https://img.shields.io/badge/Gitee-国内下载-c71d23?logo=gitee)](https://gitee.com/xvxv663/android-claude-agent)
+[![GitHub](https://img.shields.io/badge/GitHub-国际版-181717?logo=github)](https://github.com/xvxv-stack7/android-claude-agent)
 
 ---
 
@@ -207,8 +207,8 @@ adb connect 127.0.0.1:5555
 ## 安装
 
 ```bash
-git clone https://gitee.com/xvxv663/termux-shizuku.git
-cd termux-shizuku && bash bootstrap.sh
+git clone https://gitee.com/xvxv663/android-claude-agent.git
+cd android-claude-agent && bash bootstrap.sh
 ```
 
 ---
@@ -303,7 +303,7 @@ adb shell dumpsys window windows | grep "mCurrentFocus"
 bash collect-info.sh
 ```
 
-输出复制发 [Issues](https://gitee.com/xvxv663/termux-shizuku/issues)。
+输出复制发 [Issues](https://gitee.com/xvxv663/android-claude-agent/issues)。
 
 ---
 
@@ -362,7 +362,7 @@ bash collect-info.sh
 - [ ] **更多传感器玩法**：GPS 定位、蓝牙设备扫描、加速度计姿势识别
 - [ ] **一键分享**：生成安装链接，发给朋友一条消息就能装上
 
-> 💡 有想法？去 [Issues](https://gitee.com/xvxv663/termux-shizuku/issues) 提。
+> 💡 有想法？去 [Issues](https://gitee.com/xvxv663/android-claude-agent/issues) 提。
 
 
 MIT

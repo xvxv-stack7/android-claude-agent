@@ -1,4 +1,4 @@
-# termux-shizuku 技能目录
+# android-claude-agent 技能目录
 
 8 个独立技能 + 4 个子技能，覆盖感知、控制、通信、自动化、开发五层。
 

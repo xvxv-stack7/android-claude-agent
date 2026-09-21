@@ -8,7 +8,7 @@ REPO_OWNER="xvxv663"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 GITEE_TOKEN="已移除_TOKEN"  # 公用 issues-only token，只用于提交反馈
-REPO_NAME="termux-shizuku"
+REPO_NAME="android-claude-agent"
 
 TITLE="[自动反馈] $(getprop ro.product.brand 2>/dev/null || echo ?) $(getprop ro.product.model 2>/dev/null || echo ?) · $(date '+%m-%d %H:%M')"
 
