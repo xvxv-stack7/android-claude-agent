@@ -1,4 +1,4 @@
-# termux-shizuku ✨
+# android-claude-agent ✨
 
 **让你的 AI 摸到手机，而且自己会动。不用 Root，不用电脑，不用 WiFi。**
 
