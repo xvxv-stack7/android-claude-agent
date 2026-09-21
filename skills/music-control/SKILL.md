@@ -5,6 +5,13 @@ description: 音乐控制——搜索、选歌、播放指定歌曲，搭配AI�
 
 # Music Control — Claude Code Skill
 
+> ⚠️ **这个技能已经过时了 —— 音乐那套重写过了。**
+>
+> 新版走**虚拟副屏 + 酷狗**：不抢你的主屏、能读到你正听到哪一句、还带"主动陪你听歌"。
+> 👉 **[android-claude-music](https://gitee.com/xvxv663/android-claude-music)**（[GitHub](https://github.com/xvxv-stack7/android-claude-music)）
+>
+> 下面这份是旧方案（网易云 API + mpv），留着给已经在跑的人做参考。
+
 Play specific songs on Android via NetEase Cloud Music API + mpv. The AI can decide what to play — by mood, time, context — not just next/previous.
 
 Powered by [NeteaseCloudMusicApiEnhanced](https://github.com/NeteaseCloudMusicApiEnhanced/api-enhanced) (MIT License).

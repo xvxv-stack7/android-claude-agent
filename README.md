@@ -242,7 +242,7 @@ check_all          # 全状态快照
 | **phone-control** | `skills/phone-control/` | 锁屏/杀应用/切歌/截图 |
 | **phone-notify** | `skills/phone-notify/` | 通知栏 + 日历操作 |
 | **phone-sensors** | `skills/phone-sensors/` | 屏幕/前台App/电量/步数/光线 |
-| **music-control** | `skills/music-control/` | 🎵 网易云API搜歌+mpv播放，AI选歌 |
+| **music-control** | `skills/music-control/` | 🎵 旧版（网易云API+mpv）→ **新版见 [android-claude-music](https://gitee.com/xvxv663/android-claude-music)** |
 
 > ⚠️ **仅适用于 Android + Termux 环境。** 这些技能依赖 `adb`、`termux-*`、Android 系统命令。桌面环境不可用。使用前需按技能文档配置：包名列表、路径、ADB 连接方式。详见各 `SKILL.md` 的 AI Setup 段落。
 

@@ -112,6 +112,8 @@ UI 元素树解析。`uiautomator dump` → 解析 XML → 返回坐标。
 ---
 
 ## music-control
+> ⚠️ **旧版**。音乐那套已重写并独立成仓库 → **[android-claude-music](https://gitee.com/xvxv663/android-claude-music)**（虚拟副屏 + 酷狗：不占主屏、能读歌词、主动陪听）。下面是旧方案存档。
+
 AI 驱动音乐播放。网易云 API（NeteaseCloudMusicApiEnhanced v4.37.0, MIT）搜歌 + mpv 流媒体播放。
 
 | 步骤 | 命令 | 耗时 |
